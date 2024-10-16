@@ -31,8 +31,8 @@ def get_ip_from_url(url):
 
 def perform_nmap_scan(ip_adress, numara):
     try:
-        print(f"Nmap taraması başlıyor... IP: {ip_adress}, Detay seviyesi: {numara}")
-        os.system(f"nmap -A -sS -v -sV -pN -T{numara} {ip_adress}")
+        print(f"Nmap taraması başlıyor... IP: {ip_adress}, Detay seviyesi: {numara}") 
+        os.system(f"nmap -A -sS -v -sV -T{numara} {ip_adress}")
         print("Nmap taramanız bitmiştir.")
         input("Devam etmek için [ENTER] basınız ")
     except Exception as e:
@@ -104,6 +104,26 @@ def check_beef_injection(url):
     except Exception as e:
         print(f"Beef kontrolü sırasında bir hata oluştu: {e}")
 
+def ctf_competition(url, ip_adress):
+    appendList=[]
+    nmap=os.system("nmap -A -v -sT -sS -sV -T5 {}".format(ip_adress))
+    #strx = input("kullanmak istediginiz araçları yazınız aktif olarak(nmap+, dirb+, sqlmap, enum4linux, hydra) yüklenmektedir bi şey seçmezseniz bunlar yüklenecetir:  ")
+    
+    #if  not strx == "":
+    #   for a in appendList:
+    #      os.system("")        
+     
+    x = int(input("site protokol olarak http mi https mi kullanıyor(1 - http, 2 - https): "))
+    if x == 1:
+        dirb=os.system("dirb http://{}".format(url))
+    if x == 2:
+        dirb=os.system("dirb https://{}".format(url))
+    enum4lınux = os.system("enum4linux {}".format(ip_adress))
+    user_name = input("kullanıcı adını giriniz")
+    passList=input("pass listi giriniz: ")
+    service= input("hangi servis üzerinden saldırıcaksınız")
+    hydra=os.system(f"hydra -l {user_name} -p {passList} {ip_adress} {service}")
+    
 def main():
     while True:
         input("Eğer root değilseniz Ctrl + C'ye basıp root olun, eğer rootsanız [ENTER] tuşuna basınız.")
@@ -111,23 +131,26 @@ def main():
 
         print("1 - Açıkları aramak istiyorum")
         print("2 - Zararlı yazılım var mı?")
+        print("3 - CTF yarışması için giriniz")
         try:
             sayıDegeri = int(input("Lütfen girmek istediğiniz sayıyı seçiniz: "))
         except ValueError:
             print("Lütfen geçerli bir sayı giriniz.")
             continue
 
-        url = input("Lütfen siteyi giriniz: ")
+        url = input("Lütfen siteyi giriniz(protokoller (http, https) olmadan giriniz): ")
         araçlar = ["nmap", "dirb", "sqlmap", "enum4linux", "hydra"]
+        ip_adress = get_ip_from_url(url)
 
         if sayıDegeri == 1:
             toolDownload = input("Araç taraması yapılacak ve yüklü olmayan araçlar yüklenecek, kabul ediyor musunuz? (y/n): ")
             if toolDownload.lower() == "y":
                 check_and_install_tools(araçlar)
 
-                ip_adress = get_ip_from_url(url)
+                
                 if ip_adress:
                     try:
+                        print("0 en detaylı taramadır ve çok uzun sürer")
                         numara = int(input("Tarama detayı için numara giriniz (0-5): "))
                         if 0 <= numara <= 5:
                             perform_nmap_scan(ip_adress, numara)
@@ -149,6 +172,8 @@ def main():
                 print("Araçlar yüklenmediği için işlem yapılamıyor.")
         elif sayıDegeri == 2:
             check_beef_injection(url)
+        elif sayıDegeri == 3:
+            ctf_competition(url, ip_adress)
         else:
             print("Lütfen geçerli bir seçenek giriniz.")
 
