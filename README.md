@@ -1,43 +1,37 @@
-# Scan-Term
 
+*Scan-Term*
 ---
 
-**Scan-Term**, web sitelerindeki güvenlik açıklarını tarayan ve sitelerin arka planda zararlı yazılım çalıştırıp çalıştırmadığını kontrol eden bir yazılımdır. Bu yazılım, CTF yarışmalarında kullanılmak üzere tamamen eğitim amaçlı olarak hazırlanmıştır.
+*Scan-Term* is a software that scans websites for vulnerabilities and checks if they are running malicious software in the background. This software is prepared entirely for educational purposes to be used in CTF competitions.
 
 ---
-
-## Kurulum
-
-Projeyi klonlayın:
+*Installation*
+Clone the project:
 
 ```bash
 git clone https://github.com/baverozmen/scan-term
 ```
 
-Sanal ortamı aktif edin:
+Activate the virtual environment:
 ```bash
 source myvenv/bin/activate
 
 ```
 
-Yazılımı çalıştırmak için:
+To run the software:
 ```bash
 python3 caff.py
 
 ```
 
 ---
-## Önemli Not
-
->Not: Bu proje tamamen eğitim amaçlıdır ve sadece CTF yarışmaları ve güvenlik araştırmaları için kullanılabilir. Kötü amaçla kullanmayıınız.
-
----
-
-## Katkıda Bulunun 
-
->Görüş ve önerilerinizi iletmek ya da geliştirmelere katkıda bulunmak için PR (Pull Request) açabilirsiniz. Ayrıca, yazılımda hata fark ederseniz lütfen bildiriniz.
-
-son olarak proje hala gelişim aşamasındadır
+*Important Note*
+>Note: This project is entirely for educational purposes and should only be used for CTF competitions and security research. Do not use it for malicious purposes.
 
 ---
+*Contribute *
+>You can open a PR (Pull Request) to provide your feedback and suggestions or contribute to the development. Also, if you notice any bugs in the software, please report them.
 
+Lastly, the project is still under development.
+
+---
